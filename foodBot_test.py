@@ -4,8 +4,9 @@ from unittest.mock import patch
 from foodBot import FoodBot
 
 class TestFoodBot(unittest.TestCase):
+    bot = FoodBot()
+    
     def setUp(self):
-        self.bot = FoodBot()
         pass
 
     def tearDown(self):
@@ -79,17 +80,10 @@ class TestFoodBot(unittest.TestCase):
         self.bot.remove_food_preference('麵')
         self.assertEqual(self.bot.food_preference, ['飯'])
 
-
     def test_get_food_preference(self):
         food_list = ['麵', '飯']
         self.bot.set_food_preference(food_list)
         self.assertEqual(self.bot.get_food_preference(), food_list)
-
-
-    def test_get_resturaunts(self):
-        ls = self.bot.get_resturaunts()
-        excepted_ls = ['c', '肯德基', '摩斯漢堡', '漢堡王']
-        self.assertEqual(ls, excepted_ls)
 
 
     def test_set_location(self):
@@ -105,9 +99,27 @@ class TestFoodBot(unittest.TestCase):
         self.assertEqual(self.bot.location, location)
 
 
-    def test_search_food(self):
-        ls = self.bot.search_food('義大利麵')
-        excepted_ls = ['A', 'B', 'C', 'D']
+    def test_get_resturaunts(self):
+        ls = self.bot.get_resturaunts()
+        excepted_ls = ['李記', '某麵館','肯德基', '摩斯漢堡', '漢堡王']
+        self.assertEqual(ls, excepted_ls)
+
+    def test_filter(self):
+        self.bot.set_price_budget(0, 200)
+        self.bot.set_food_preference(['麵', '飯'])
+        self.bot.set_location(longitude = 120.1, latitude = 25.1)
+        results = self.bot.get_resturaunts()
+        ls = self.bot.filter(results)
+        excepted_ls = ['李記', '某麵館']
+        self.assertEqual(ls, excepted_ls)
+
+    def test_recommend(self):
+        self.bot.set_price_budget(0, 200)
+        self.bot.set_food_preference(['麵', '飯'])
+        self.bot.set_location(longitude = 120.1, latitude = 25.1)
+        results = self.bot.get_resturaunts()
+        ls = self.bot.recommend(results)
+        excepted_ls = ['李記']
         self.assertEqual(ls, excepted_ls)
 
 
@@ -119,5 +131,24 @@ def sutie_food_preference():
     suite.addTest(TestFoodBot('test_get_food_preference'))
     return suite
 
+def sutie_get_recommend():
+    suite = unittest.TestSuite()
+    suite.addTest(TestFoodBot('test_set_location'))
+    suite.addTest(TestFoodBot('test_get_resturaunts'))
+    suite.addTest(TestFoodBot('test_filter'))
+    suite.addTest(TestFoodBot('test_recommend'))
+    return suite
+
+def suite_other():
+    suite = unittest.TestSuite()
+    suite.addTest(TestFoodBot('test_set_price_budget'))
+    suite.addTest(TestFoodBot('test_user_input'))
+    return suite
+
 if __name__ == '__main__':
-    unittest.main()
+    runner = unittest.TextTestRunner()
+    runner.run(sutie_food_preference())
+    runner.run(sutie_get_recommend())
+    runner.run(suite_other())
+    
+    # unittest.main()
