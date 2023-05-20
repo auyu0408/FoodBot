@@ -11,11 +11,14 @@ This is a discord bot for choosing what to eat.
 
 ### Criteria-Based Test Design
 
-- Input Space Partition
-- Graph Coverage
-  - Edge-pair
-  - Data-flow
-    - All define-use paths coverage (ADUPC)
-- Logic Coverage
+#### Input Space Partition
 
-### Syntax Coverage
+#### Graph Coverage
+
+- Edge-pair
+- Data-flow
+  - All define-use paths coverage (ADUPC)
+
+#### Logic Coverage
+
+#### Syntax Coverage
