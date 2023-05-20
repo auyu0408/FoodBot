@@ -2,9 +2,14 @@ import os
 import asyncio
 import discord
 from discord.ext import commands
+import configparser
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix = "$", intents = intents)
+
+# 讀取config.ini檔案
+config = configparser.ConfigParser()
+config.read("config.ini")
 
 # 當機器人完成啟動時
 @bot.event
@@ -40,7 +45,7 @@ async def load_extensions():
 async def main():
     async with bot:
         await load_extensions()
-        await bot.start("MTEwOTM3Mzk4MDkxNTI3Mzc3MA.GOSMhW.kviz4bcsPTFJNJ1Qm8dfTbhAASleHlWlHs_QiI")
+        await bot.start(config["Token"]["discord_token"])
 
 # 確定執行此py檔才會執行
 if __name__ == "__main__":
