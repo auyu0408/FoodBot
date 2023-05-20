@@ -1,9 +1,6 @@
-
-MAX_PRICE = 10000
-
 class FoodAPI:
     def __init__(self):
-        self.price_budget = (0, MAX_PRICE)
+        self.price_budget = (0, 10000)
         self.food_preference = []
         self.longitude = 0
         self.latitude = 0
@@ -22,7 +19,8 @@ class FoodAPI:
         pass
 
     def get_food_preference(self):
-        pass
+        # temp return
+        return ['麵食', '速食', '飯類', '飲料', '甜點']
 
     def set_location(self, longitude = 0, latitude = 0, location = ''):
         pass
