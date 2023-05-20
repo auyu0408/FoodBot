@@ -68,6 +68,9 @@ class TestFoodAPI(unittest.TestCase):
         self.assertRaises(TypeError, self.bot.set_price_budget, 0, 'a')
         self.assertRaises(TypeError, self.bot.set_price_budget, 'a', 'a')
 
+    def test_reset_food_preference(self):
+        self.bot.reset_food_preference()
+        self.assertEqual(self.bot.food_preference, [])
 
     def test_set_food_preference(self):
         food_list = ['牛排', '速食']

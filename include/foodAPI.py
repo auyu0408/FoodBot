@@ -9,14 +9,17 @@ class FoodAPI:
     def set_price_budget(self, min, max):
         pass
 
+    def reset_food_preference(self):
+        pass
+
     def set_food_preference(self, food_list):
         pass
 
     def add_food_preference(self, food):
-        pass
+        self.food_preference.append(food)
 
     def remove_food_preference(self, food):
-        pass
+        self.food_preference.remove(food)
 
     def get_food_preference(self):
         # temp return
