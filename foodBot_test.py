@@ -3,11 +3,21 @@ from unittest.mock import Mock
 from unittest.mock import patch
 from foodBot import FoodBot
 
+default_price_budget = (0, 10000)
+default_food_preference = ['麵食', '便當']
+default_longitude = 120.9955156241461
+default_latitude = 24.784065460221402
+default_location = ''
+
 class TestFoodBot(unittest.TestCase):
     bot = FoodBot()
     
     def setUp(self):
-        pass
+        self.bot.price_budget = default_price_budget
+        self.bot.food_preference = default_food_preference
+        self.bot.longitude = default_longitude
+        self.bot.latitude = default_latitude
+        self.bot.location = default_location
 
     def tearDown(self):
         pass
@@ -29,7 +39,7 @@ class TestFoodBot(unittest.TestCase):
         input = ['asdf']
         valid, out= self.bot.user_input(input)
         self.assertEqual(valid, False)
-        self.assertEqual(out, 'Invalid command, illegal format, lack of "\\".')
+        self.assertEqual(out, 'Invalid command, illegal format, lack of "".')
 
         # help
         input = ['/help']
@@ -43,16 +53,15 @@ class TestFoodBot(unittest.TestCase):
         self.bot.set_price_budget(0, 200)
         self.assertEqual(self.bot.price_budget, (0, 200))
 
-        # valid input, upper bound is inf
-        self.bot.set_price_budget(0, -1)
-        self.assertEqual(self.bot.price_budget, (0, -1))
-
         # valid input, lower bound < 0, convert lower bound to zero
         self.bot.set_price_budget(-5, 200)
         self.assertEqual(self.bot.price_budget, (0, 200))
 
         # invalid input, upper bound < lower bound
         self.assertRaises(ValueError, self.bot.set_price_budget, 200, 0)
+
+        # invalid input, upper bound < 0
+        self.assertRaises(ValueError, self.bot.set_price_budget, 0, -5)
 
         # invalid input, wrong type
         self.assertRaises(TypeError, self.bot.set_price_budget, 'a', 200)
@@ -61,29 +70,28 @@ class TestFoodBot(unittest.TestCase):
 
 
     def test_set_food_preference(self):
-        food_list = ['麵', '飯']
+        food_list = ['牛排', '速食']
         self.bot.set_food_preference(food_list)
         self.assertEqual(self.bot.food_preference, food_list)
 
 
     def test_add_food_preference(self):
-        self.bot.add_food_preference('麵')
-        self.assertEqual(self.bot.food_preference, ['麵'])
+        food_list = ['牛排', '速食'] + ['牛排']
+        self.bot.add_food_preference('牛排')
+        self.assertEqual(self.bot.food_preference, food_list)
 
-        self.bot.add_food_preference('飯')
-        self.assertEqual(self.bot.food_preference, ['麵', '飯'])
+        food_list = food_list + ['速食']
+        self.bot.add_food_preference('速食')
+        self.assertEqual(self.bot.food_preference, food_list)
 
 
     def test_remove_food_preference(self):
-        self.bot.add_food_preference('麵')
-        self.bot.add_food_preference('飯')
-        self.bot.remove_food_preference('麵')
-        self.assertEqual(self.bot.food_preference, ['飯'])
+        food_list = default_food_preference.remove('麵食')
+        self.bot.remove_food_preference('麵食')
+        self.assertEqual(self.bot.food_preference, food_list)
 
     def test_get_food_preference(self):
-        food_list = ['麵', '飯']
-        self.bot.set_food_preference(food_list)
-        self.assertEqual(self.bot.get_food_preference(), food_list)
+        self.assertEqual(self.bot.get_food_preference(), default_food_preference)
 
 
     def test_set_location(self):
@@ -101,26 +109,27 @@ class TestFoodBot(unittest.TestCase):
 
     def test_get_resturaunts(self):
         ls = self.bot.get_resturaunts()
-        excepted_ls = ['李記', '某麵館','肯德基', '摩斯漢堡', '漢堡王']
+        excepted_ls = ['李記', '魯肉飯', '鍋燒麵', '麥當勞', '牛排館']
         self.assertEqual(ls, excepted_ls)
 
     def test_filter(self):
-        self.bot.set_price_budget(0, 200)
-        self.bot.set_food_preference(['麵', '飯'])
-        self.bot.set_location(longitude = 120.1, latitude = 25.1)
+        # defaut food preference
         results = self.bot.get_resturaunts()
         ls = self.bot.filter(results)
-        excepted_ls = ['李記', '某麵館']
+        excepted_ls = ['李記', '魯肉飯', '鍋燒麵']
+        self.assertEqual(ls, excepted_ls)
+
+        # after adding food preference
+        self.bot.add_food_preference('牛排')
+        ls = self.bot.filter(results)
+        excepted_ls = ['李記', '魯肉飯', '鍋燒麵', '牛排館']
         self.assertEqual(ls, excepted_ls)
 
     def test_recommend(self):
-        self.bot.set_price_budget(0, 200)
-        self.bot.set_food_preference(['麵', '飯'])
-        self.bot.set_location(longitude = 120.1, latitude = 25.1)
         results = self.bot.get_resturaunts()
         ls = self.bot.recommend(results)
-        excepted_ls = ['李記']
-        self.assertEqual(ls, excepted_ls)
+        excepted = '李記'
+        self.assertEqual(ls, excepted)
 
 
 def sutie_food_preference():
