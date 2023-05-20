@@ -2,7 +2,7 @@ import discord
 from discord import app_commands
 
 from core.classes import Cog_Extension
-from foodAPI import FoodAPI
+from include.foodAPI import FoodAPI
 
 class FoodBot(Cog_Extension):
     api = FoodAPI()

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from unittest.mock import patch
-from foodBot import FoodBot
+from include.foodAPI import FoodAPI
 
 default_price_budget = (0, 10000)
 default_food_preference = ['麵食', '便當']
@@ -9,8 +9,8 @@ default_longitude = 120.9955156241461
 default_latitude = 24.784065460221402
 default_location = ''
 
-class TestFoodBot(unittest.TestCase):
-    bot = FoodBot()
+class TestFoodAPI(unittest.TestCase):
+    bot = FoodAPI()
     
     def setUp(self):
         self.bot.price_budget = default_price_budget
@@ -134,24 +134,24 @@ class TestFoodBot(unittest.TestCase):
 
 def sutie_food_preference():
     suite = unittest.TestSuite()
-    suite.addTest(TestFoodBot('test_set_food_preference'))
-    suite.addTest(TestFoodBot('test_add_food_preference'))
-    suite.addTest(TestFoodBot('test_remove_food_preference'))
-    suite.addTest(TestFoodBot('test_get_food_preference'))
+    suite.addTest(FoodAPI('test_set_food_preference'))
+    suite.addTest(FoodAPI('test_add_food_preference'))
+    suite.addTest(FoodAPI('test_remove_food_preference'))
+    suite.addTest(FoodAPI('test_get_food_preference'))
     return suite
 
 def sutie_get_recommend():
     suite = unittest.TestSuite()
-    suite.addTest(TestFoodBot('test_set_location'))
-    suite.addTest(TestFoodBot('test_get_resturaunts'))
-    suite.addTest(TestFoodBot('test_filter'))
-    suite.addTest(TestFoodBot('test_recommend'))
+    suite.addTest(FoodAPI('test_set_location'))
+    suite.addTest(FoodAPI('test_get_resturaunts'))
+    suite.addTest(FoodAPI('test_filter'))
+    suite.addTest(FoodAPI('test_recommend'))
     return suite
 
 def suite_other():
     suite = unittest.TestSuite()
-    suite.addTest(TestFoodBot('test_set_price_budget'))
-    suite.addTest(TestFoodBot('test_user_input'))
+    suite.addTest(FoodAPI('test_set_price_budget'))
+    suite.addTest(FoodAPI('test_user_input'))
     return suite
 
 if __name__ == '__main__':
