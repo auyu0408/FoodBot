@@ -70,20 +70,20 @@ class TestFoodAPI(unittest.TestCase):
 
     def test_reset_food_preference(self):
         self.bot.reset_food_preference()
-        self.assertEqual(self.bot.food_preference, [])
+        self.assertEqual(self.bot.food_preference, set())
 
     def test_set_food_preference(self):
-        food_list = ['牛排', '速食']
+        food_list = {'牛排', '速食'}
         self.bot.set_food_preference(food_list)
         self.assertEqual(self.bot.food_preference, food_list)
 
 
     def test_add_food_preference(self):
-        food_list = ['牛排', '速食'] + ['牛排']
+        food_list = {'牛排', '速食'}.add('牛排')
         self.bot.add_food_preference('牛排')
         self.assertEqual(self.bot.food_preference, food_list)
 
-        food_list = food_list + ['速食']
+        food_list = food_list.add('速食')
         self.bot.add_food_preference('速食')
         self.assertEqual(self.bot.food_preference, food_list)
 
@@ -107,25 +107,28 @@ class TestFoodAPI(unittest.TestCase):
         self.assertEqual(self.bot.latitude, latitude)
 
         self.bot.set_location(location = location)
-        self.assertEqual(self.bot.location, location)
+        #self.assertEqual(self.bot.location, location)
+        self.assertEqual(self.bot.longitude, 120.9821165)
+        self.assertEqual(self.bot.latitude, 24.7914998)
+
 
 
     def test_get_resturaunts(self):
         ls = self.bot.get_resturaunts()
-        excepted_ls = ['李記', '魯肉飯', '鍋燒麵', '麥當勞', '牛排館']
+        excepted_ls = {'李記', '魯肉飯', '鍋燒麵', '麥當勞', '牛排館'}
         self.assertEqual(ls, excepted_ls)
 
     def test_filter(self):
         # defaut food preference
         results = self.bot.get_resturaunts()
         ls = self.bot.filter(results)
-        excepted_ls = ['李記', '魯肉飯', '鍋燒麵']
+        excepted_ls = {'李記', '魯肉飯', '鍋燒麵'}
         self.assertEqual(ls, excepted_ls)
 
         # after adding food preference
         self.bot.add_food_preference('牛排')
         ls = self.bot.filter(results)
-        excepted_ls = ['李記', '魯肉飯', '鍋燒麵', '牛排館']
+        excepted_ls = {'李記', '魯肉飯', '鍋燒麵', '牛排館'}
         self.assertEqual(ls, excepted_ls)
 
     def test_recommend(self):
