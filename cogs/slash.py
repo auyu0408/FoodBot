@@ -50,10 +50,21 @@ class Slash(Cog_Extension):
         await interaction.response.send_message(f"{customer} 點了 {size} 號 {meal} 餐")
     
     # invite button
+    class Invite(discord.ui.View):
+        def __init__(self, inv: str):
+            super().__init__()
+            self.inv = inv
+            self.add_item(discord.ui.Button(label='邀請機器人', url=self.inv))
+
+        @discord.ui.button(label='邀請機器人', custom_id="invite_button", style=discord.ButtonStyle.blurple)
+        async def invite(self, button: discord.ui.Button, interaction: discord.Interaction):
+            print("button clicked")
+            await interaction.response.send_message(str(self.inv))
+
     @app_commands.command(name = "invite", description = "邀請機器人")
     async def invite(self, interaction: discord.Interaction):
         inv = await interaction.channel.create_invite()
-        await interaction.response.send_message(str(inv))
+        await interaction.response.send_message("邀請機器人", view=self.Invite(str(inv)))
 
     # counter button
     class Counter(discord.ui.View):
