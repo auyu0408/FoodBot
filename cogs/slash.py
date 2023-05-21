@@ -48,6 +48,29 @@ class Slash(Cog_Extension):
         meal = meal.value
         size = size.value
         await interaction.response.send_message(f"{customer} 點了 {size} 號 {meal} 餐")
+    
+    # invite button
+    @app_commands.command(name = "invite", description = "邀請機器人")
+    async def invite(self, interaction: discord.Interaction):
+        inv = await interaction.channel.create_invite()
+        await interaction.response.send_message(str(inv))
+
+    # counter button
+    class Counter(discord.ui.View):
+        def __init__(self):
+            super().__init__()
+
+        @discord.ui.button(label='0', custom_id="counter_button", style=discord.ButtonStyle.primary)
+        async def count(self, button: discord.ui.Button, interaction: discord.Interaction):
+            value = int(button.label)
+            value += 1
+            button.label = str(value)
+            await interaction.response.edit_message(view=self)
+        
+
+    @app_commands.command(name = "counter", description = "計數器")
+    async def counter(self, interaction: discord.Interaction):
+        await interaction.response.send_message('計數器', view=self.Counter())
 
 async def setup(bot):
     await bot.add_cog(Slash(bot))
