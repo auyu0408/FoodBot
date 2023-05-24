@@ -19,14 +19,14 @@ def change_location(location):
 
 class FoodAPI:
     def __init__(self):
-        self.price_budget = (0, 10000)
+        self.price_budget = set()
         self.food_preference = set()
         self.longitude = 120.9955156241461
         self.latitude = 24.784065460221402
         self.location = ''
         self.restaurants = []
 
-        with open('config.json') as f:
+        with open('./foodAPI/config.json') as f:
             config = json.load(f)
             self.data = config['data'][0]
             self.headers = config['headers'][0]
@@ -51,9 +51,19 @@ class FoodAPI:
             print('請求失敗')
             return []
 
-    def set_price_budget(self, budget):
-        self.price_budget = budget
+    def add_price_budget(self, budget):
+        self.price_budget.add(budget)
         return self.price_budget
+
+    def reset_price_budget(self):
+        self.price_budget = set()
+        return self.price_budget
+
+    def get_price_budget(self):
+        if len(self.price_budget) == 0:
+            return "無"
+        else:
+            return str(self.price_budget).strip("\{\}").replace("\'", "")
 
     def reset_food_preference(self):
         self.food_preference = set()
@@ -72,7 +82,10 @@ class FoodAPI:
         return self.food_preference
 
     def get_food_preference(self):
-        return self.food_preference
+        if len(self.food_preference) == 0:
+            return "無"
+        else:
+            return str(self.food_preference).strip("\{\}").replace("\'", "")
 
     def set_location(self, longitude = 0, latitude = 0, location = ''):
         self.longitude =longitude
