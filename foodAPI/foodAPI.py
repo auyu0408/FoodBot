@@ -17,6 +17,12 @@ def change_location(location):
     num2 = float(line[2])
     return (num1, num2)
 
+def set_to_str(_set):
+    if len(_set) == 0:
+        return "無"
+    else:
+        return str(_set).strip("\{\}").replace("\'", "")
+
 class FoodAPI:
     def __init__(self):
         self.price_budget = set()
@@ -60,10 +66,7 @@ class FoodAPI:
         return self.price_budget
 
     def get_price_budget(self):
-        if len(self.price_budget) == 0:
-            return "無"
-        else:
-            return str(self.price_budget).strip("\{\}").replace("\'", "")
+        return set_to_str(self.price_budget)
 
     def reset_food_preference(self):
         self.food_preference = set()
@@ -82,10 +85,7 @@ class FoodAPI:
         return self.food_preference
 
     def get_food_preference(self):
-        if len(self.food_preference) == 0:
-            return "無"
-        else:
-            return str(self.food_preference).strip("\{\}").replace("\'", "")
+        return set_to_str(self.food_preference)
 
     def set_location(self, longitude = 0, latitude = 0, location = ''):
         self.longitude =longitude
