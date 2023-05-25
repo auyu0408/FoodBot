@@ -1,7 +1,6 @@
 import unittest
 
 from test_foodAPI import TestFoodAPI
-from test_foodAPI import DEFAULT
 
 
 class TestPriceBudget(TestFoodAPI):
@@ -17,6 +16,10 @@ class TestPriceBudget(TestFoodAPI):
         expected = {'低', '中', '高'}
         ret = self.bot.add_price_budget('高')
         self.assertEqual(ret, expected)
+
+        with self.assertRaises(ValueError):
+            self.bot.add_price_budget(123)
+            self.bot.add_price_budget('無限')
 
     def test_reset_price_budget(self):
         ret = self.bot.reset_price_budget()
