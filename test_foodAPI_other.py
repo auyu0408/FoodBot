@@ -18,33 +18,23 @@ class TestOther(TestFoodAPI):
         self.assertAlmostEqual(self.bot.latitude, latitude, delta=0.01)
 
     def test_get_resturaunts(self):
+        ret = self.bot.get_restaurants()
+        self.assertIsNot(ret, [])
+
+        self.bot.set_food_preference('Invalid food')
+        ret = self.bot.get_restaurants()
+        self.assertEqual(ret, [])
+
+    def test_filter(self):
         pass
-        # print(self.bot.send_request())
-        # mock_send_request.return_value ={
-        #     "name" =
-        # }
-        # ret = self.bot.get_restaurants()
-        # expected = {'李記', '魯肉飯', '鍋燒麵', '麥當勞', '牛排館'}
-        # self.assertEqual(ret, expected)
 
-    # def test_filter(self):
-    #     # defaut food preference
-    #     results = self.bot.get_restaurants()
-    #     ls = self.bot.filter(results)
-    #     excepted_ls = {'李記', '魯肉飯', '鍋燒麵'}
-    #     self.assertEqual(ls, excepted_ls)
+    def test_recommend(self):
+        ret = self.bot.recommend()
+        self.assertIsNot(ret, [])
 
-    #     # after adding food preference
-    #     self.bot.add_food_preference('牛排')
-    #     ls = self.bot.filter(results)
-    #     excepted_ls = {'李記', '魯肉飯', '鍋燒麵', '牛排館'}
-    #     self.assertEqual(ls, excepted_ls)
-
-    # def test_recommend(self):
-    #     results = self.bot.get_restaurants()
-    #     ls = self.bot.recommend(results)
-    #     excepted = '李記'
-    #     self.assertEqual(ls, excepted)
+        self.bot.add_food_preference('Invalid food')
+        with self.assertRaises(IndexError):
+            ret = self.bot.recommend()
 
 
 if __name__ == '__main__':
