@@ -17,11 +17,27 @@ def change_location(location):
     num2 = float(line[2])
     return (num1, num2)
 
-def set_to_str(_set):
+price_dic = {1: "低", 2: "中", 3: "高"}
+def price_to_str(_set):
     if len(_set) == 0:
         return "無"
     else:
-        return str(_set).strip("\{\}").replace("\'", "")
+        string = ""
+        for i in _set:
+            string += price_dic[i] + " "
+        # return str(_set).strip("\{\}").replace("\'", "")
+        return string
+
+cuisine_dic = {177: "漢堡", 201: "麵食", 1215: "便當", 181: "飲料", 176: "甜點", 1211: "牛排", 186: "素食"}
+def food_to_str(_set):
+    if len(_set) == 0:
+        return "無"
+    else:
+        string = ""
+        for i in _set:
+            string += cuisine_dic[i] + " "
+        # return str(_set).strip("\{\}").replace("\'", "")
+        return string
 
 class FoodAPI:
     def __init__(self):
@@ -66,7 +82,7 @@ class FoodAPI:
         return self.price_budget
 
     def get_price_budget(self):
-        return set_to_str(self.price_budget)
+        return price_to_str(self.price_budget)
 
     def reset_food_preference(self):
         self.food_preference = set()
@@ -85,7 +101,7 @@ class FoodAPI:
         return self.food_preference
 
     def get_food_preference(self):
-        return set_to_str(self.food_preference)
+        return food_to_str(self.food_preference)
 
     def set_location(self, longitude = 0, latitude = 0, location = ''):
         self.longitude =longitude

@@ -34,15 +34,15 @@ class FoodBot(Cog_Extension):
             self.apis = apis
         @discord.ui.button(label = "低", style = discord.ButtonStyle.primary)
         async def low(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_price_budget("低")
+            self.apis[self.user].add_price_budget(1)
             await interaction.response.send_message(f"價格範圍:{self.apis[self.user].get_price_budget()}")
         @discord.ui.button(label = "中", style = discord.ButtonStyle.primary)
         async def medium(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_price_budget("中")
+            self.apis[self.user].add_price_budget(2)
             await interaction.response.send_message(f"價格範圍:{self.apis[self.user].get_price_budget()}")
         @discord.ui.button(label = "高", style = discord.ButtonStyle.primary)
         async def high(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_price_budget("高")
+            self.apis[self.user].add_price_budget(3)
             await interaction.response.send_message(f"價格範圍:{self.apis[self.user].get_price_budget()}")
     @app_commands.command(name = "new_set_price_budget", description = "設定價格範圍")
     async def new_set_price_budget(self, interaction: discord.Interaction):
@@ -69,9 +69,10 @@ class FoodBot(Cog_Extension):
     @app_commands.choices(
         food = [
             Choice(name = "漢堡", value = "漢堡"),
+            Choice(name = "牛排", value = "牛排"),
             Choice(name = "麵食", value = "麵食"),
-            Choice(name = "速食", value = "速食"),
-            Choice(name = "飯類", value = "飯類"),
+            Choice(name = "素食", value = "素食"),
+            Choice(name = "便當", value = "便當"),
             Choice(name = "飲料", value = "飲料"),
             Choice(name = "甜點", value = "甜點")
         ]
@@ -89,27 +90,31 @@ class FoodBot(Cog_Extension):
             self.apis = apis
         @discord.ui.button(label = "漢堡", style = discord.ButtonStyle.primary)
         async def hamburger(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_food_preference("漢堡")
+            self.apis[self.user].add_food_preference(177)
+            await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
+        @discord.ui.button(label = "牛排", style = discord.ButtonStyle.primary)
+        async def hamburger(self, interaction: discord.Interaction, button: discord.ui.Button):
+            self.apis[self.user].add_food_preference(1211)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
         @discord.ui.button(label = "麵食", style = discord.ButtonStyle.primary)
         async def noodle(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_food_preference("麵食")
+            self.apis[self.user].add_food_preference(201)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
-        @discord.ui.button(label = "速食", style = discord.ButtonStyle.primary)
+        @discord.ui.button(label = "素食", style = discord.ButtonStyle.primary)
         async def fastfood(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_food_preference("速食")
+            self.apis[self.user].add_food_preference(186)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
-        @discord.ui.button(label = "飯類", style = discord.ButtonStyle.primary)
+        @discord.ui.button(label = "便當", style = discord.ButtonStyle.primary)
         async def rice(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_food_preference("飯類")
+            self.apis[self.user].add_food_preference(1215)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
         @discord.ui.button(label = "飲料", style = discord.ButtonStyle.primary)
         async def drink(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_food_preference("飲料")
+            self.apis[self.user].add_food_preference(181)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
         @discord.ui.button(label = "甜點", style = discord.ButtonStyle.primary)
         async def dessert(self, interaction: discord.Interaction, button: discord.ui.Button):
-            self.apis[self.user].add_food_preference("甜點")
+            self.apis[self.user].add_food_preference(176)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
         
     @app_commands.command(name = "new_add_food_preference", description = "設定食物偏好")
