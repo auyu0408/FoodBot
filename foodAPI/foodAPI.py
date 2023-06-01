@@ -57,7 +57,7 @@ class FoodAPI:
         self.data['longitude'] = self.longitude
         self.data['latitude'] = self.latitude
         self.data['budget'] = self.price_budget
-        self.data['cuisine'] = set()
+        self.data['cuisine'] = self.food_preference
 
         return
     
@@ -125,7 +125,7 @@ class FoodAPI:
             flag = 0
             for cuisine in restaurant['cuisines']:
                 for preference in self.food_preference:
-                    if cuisine['name'] == preference:
+                    if cuisine['name'] == cuisine_dic[preference]:
                         flag = 1
                         break
             if flag:
@@ -134,6 +134,7 @@ class FoodAPI:
         return name
 
     def recommend(self):
+        self.restaurants = self.send_request()
         max = len(self.restaurants)
         num = random.randint(0,max)
         return self.restaurants[num]['name']

@@ -16,8 +16,8 @@ class FoodBot(Cog_Extension):
     @app_commands.command(name = "set_location", description = "設定目前位置")
     async def set_location(self, interaction: discord.Interaction, location: str):
         user = interaction.user.name
-        self.apis[user].set_location(location)
-        await interaction.response.send_message(f"目前位置: {self.apis[user].get_location()}")
+        self.apis[user].set_location(location=location)
+        await interaction.response.send_message(f"目前位置: {location}")
 
     # Set price budget
     @app_commands.command(name = "set_price_budget", description = "設定價格範圍")
@@ -139,13 +139,15 @@ class FoodBot(Cog_Extension):
     # Get resturaunts
     @app_commands.command(name = "get_resturaunts", description = "取得附近餐廳")
     async def get_resturaunts(self, interaction: discord.Interaction):
-        ls = self.api.get_resturaunts()
+        user = interaction.user.name
+        ls = self.apis[user].get_restaurants()
         await interaction.response.send_message(ls)
         
     # Recommend a resturaunt
     @app_commands.command(name = "recommend", description = "建議一間餐廳")
     async def recommend(self, interaction: discord.Interaction):
-        resturaunt = self.api.recommend()
+        user = interaction.user.name
+        resturaunt = self.apis[user].recommend()
         await interaction.response.send_message(f"要不要吃: {resturaunt}")
 
     # Show setting
