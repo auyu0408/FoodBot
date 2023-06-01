@@ -5,16 +5,16 @@ from test_foodAPI import TestFoodAPI
 
 class TestPriceBudget(TestFoodAPI):
     def test_add_price_budget(self):
-        expected = {'低'}
-        ret = self.bot.add_price_budget('低')
+        expected = {1}
+        ret = self.bot.add_price_budget(1)
         self.assertEqual(ret, expected)
 
-        expected = {'低', '中'}
-        ret = self.bot.add_price_budget('中')
+        expected = {1, 2}
+        ret = self.bot.add_price_budget(2)
         self.assertEqual(ret, expected)
 
-        expected = {'低', '中', '高'}
-        ret = self.bot.add_price_budget('高')
+        expected = {1, 2, 3}
+        ret = self.bot.add_price_budget(3)
         self.assertEqual(ret, expected)
 
         with self.assertRaises(ValueError):
@@ -26,11 +26,9 @@ class TestPriceBudget(TestFoodAPI):
         self.assertEqual(ret, set())
 
     def test_get_price_budget(self):
-        expected = self.bot.price_budget
+        expected = '低 '
         ret = self.bot.get_price_budget()
-
-        for a, b in zip(ret, expected):
-            self.assertEqual(a, b)
+        self.assertEqual(ret, expected)
 
 
 if __name__ == '__main__':

@@ -17,16 +17,9 @@ class TestOther(TestFoodAPI):
         self.assertAlmostEqual(self.bot.longitude, longitude, delta=0.01)
         self.assertAlmostEqual(self.bot.latitude, latitude, delta=0.01)
 
-        # self.bot.set_location(location=location)
-        # self.assertEqual(self.bot.location, location)
-        # self.assertEqual(self.bot.longitude, longitude)
-        # self.assertEqual(self.bot.latitude, latitude)
-
-    # need to mock send request
-    # @patch('foodAPI.foodAPI.FoodAPI.send_request')
-    # def test_get_resturaunts(self, mock_send_request: Mock):
     def test_get_resturaunts(self):
-        print(self.bot.send_request())
+        pass
+        # print(self.bot.send_request())
         # mock_send_request.return_value ={
         #     "name" =
         # }

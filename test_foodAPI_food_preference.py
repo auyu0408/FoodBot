@@ -1,5 +1,6 @@
 import unittest
 
+from foodAPI import foodAPI
 from test_foodAPI import TestFoodAPI
 
 
@@ -19,20 +20,20 @@ class TestFoodPreference(TestFoodAPI):
         ret = self.bot.add_food_preference('牛排')
         self.assertEqual(ret, food_list)
 
-        food_list.add('速食')
-        ret = self.bot.add_food_preference('速食')
+        food_list.add('素食')
+        ret = self.bot.add_food_preference('素食')
         self.assertEqual(ret, food_list)
 
     def test_remove_food_preference(self):
         food_list = set(self.bot.food_preference)
-        food_list.remove('麵食')
-        ret = self.bot.remove_food_preference('麵食')
+        f = foodAPI.food_name2id('麵食')
+        food_list.remove(f)
+        ret = self.bot.remove_food_preference(f)
         self.assertEqual(ret, food_list)
 
     def test_get_food_preference(self):
-        food_list = set(self.bot.food_preference)
         ret = self.bot.get_food_preference()
-        expected = str(food_list).strip("\{\}").replace("\'", "")
+        expected = foodAPI.food_to_str(self.bot.food_preference)
         self.assertEqual(ret, expected)
 
 
