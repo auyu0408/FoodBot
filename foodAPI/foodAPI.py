@@ -35,8 +35,8 @@ def price_to_str(_set):
         return string.strip()
 
 
-cuisine_dic = {'漢堡':177, '麵食':201, '便當':1215,
-               '飲料':181, '甜點':176, '牛排':1211, '素食':186}
+cuisine_dic = {177:'漢堡', 201:'麵食', 1215:'便當',
+               181:'飲料', 176:'甜點', 1211:'牛排', 186:'素食'}
 
 
 def food_to_str(_set):
@@ -92,7 +92,7 @@ class FoodAPI:
             return []
 
     def add_price_budget(self, budget):
-        if budget not in price_dic:
+        if price_dic.get(budget) == None:
             raise(ValueError)
         self.price_budget.add(budget)
         return self.price_budget
