@@ -125,6 +125,8 @@ class FoodAPI:
     def remove_food_preference(self, food):
         if food in self.food_preference:
             self.food_preference.remove(food)
+        else:
+            raise(ValueError)
         return self.food_preference
 
     def get_food_preference(self):
