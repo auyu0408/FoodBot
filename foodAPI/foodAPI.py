@@ -123,7 +123,8 @@ class FoodAPI:
         return self.food_preference
 
     def remove_food_preference(self, food):
-        self.food_preference.remove(food)
+        if food in self.food_preference:
+            self.food_preference.remove(food)
         return self.food_preference
 
     def get_food_preference(self):

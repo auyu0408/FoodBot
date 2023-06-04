@@ -10,18 +10,18 @@ class TestFoodPreference(TestFoodAPI):
         self.assertEqual(self.bot.food_preference, set())
 
     def test_set_food_preference(self):
-        food_list = {'牛排', '甜點', '便當'}
+        food_list = {1211, 176, 1215}
         ret = self.bot.set_food_preference(food_list)
         self.assertEqual(ret, food_list)
 
     def test_add_food_preference(self):
         food_list = set(self.bot.food_preference)
-        food_list.add('牛排')
-        ret = self.bot.add_food_preference('牛排')
+        food_list.add(1211)
+        ret = self.bot.add_food_preference(1211)
         self.assertEqual(ret, food_list)
 
-        food_list.add('素食')
-        ret = self.bot.add_food_preference('素食')
+        food_list.add(186)
+        ret = self.bot.add_food_preference(186)
         self.assertEqual(ret, food_list)
 
     def test_remove_food_preference(self):
