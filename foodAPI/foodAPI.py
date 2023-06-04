@@ -32,7 +32,7 @@ def price_to_str(_set):
         for i in _set:
             string += price_dic[i] + " "
         # return str(_set).strip("\{\}").replace("\'", "")
-        return string
+        return string.strip()
 
 
 cuisine_dic = {177: "漢堡", 201: "麵食", 1215: "便當",
@@ -47,7 +47,7 @@ def food_to_str(_set):
         for i in _set:
             string += cuisine_dic[i] + " "
         # return str(_set).strip("\{\}").replace("\'", "")
-        return string
+        return string.strip()
 
 
 def food_name2id(name: str) -> int:
@@ -92,6 +92,8 @@ class FoodAPI:
             return []
 
     def add_price_budget(self, budget):
+        if budget not in price_dic:
+            raise(ValueError)
         self.price_budget.add(budget)
         return self.price_budget
 
@@ -107,10 +109,16 @@ class FoodAPI:
         return self.food_preference
 
     def set_food_preference(self, food_list):
+        if type(food_list) != type(set()):
+            raise(TypeError)
+        if any(x not in cuisine_dic for x in food_list):
+            raise(ValueError)
         self.food_preference = food_list
         return self.food_preference
 
     def add_food_preference(self, food):
+        if food not in cuisine_dic:
+            raise(ValueError)
         self.food_preference.add(food)
         return self.food_preference
 
