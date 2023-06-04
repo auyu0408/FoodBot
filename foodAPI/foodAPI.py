@@ -128,7 +128,7 @@ class FoodAPI:
         return self.food_preference
 
     def get_food_preference(self):
-        return self.food_preference
+        return food_to_str(self.food_preference)
 
     def set_location(self, longitude=0, latitude=0, location=''):
         self.longitude = longitude

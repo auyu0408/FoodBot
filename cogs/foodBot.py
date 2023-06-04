@@ -115,7 +115,7 @@ class FoodBot(Cog_Extension):
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
 
         @discord.ui.button(label="便當", style=discord.ButtonStyle.primary)
-        async def vegetarian(self, interaction: discord.Interaction, button: discord.ui.Button):
+        async def convenient(self, interaction: discord.Interaction, button: discord.ui.Button):
             self.apis[self.user].add_food_preference(1215)
             await interaction.response.send_message(f"食物偏好:{self.apis[self.user].get_food_preference()}")
 
