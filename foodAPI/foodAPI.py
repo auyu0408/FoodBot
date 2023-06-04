@@ -35,8 +35,8 @@ def price_to_str(_set):
         return string.strip()
 
 
-cuisine_dic = {177: "漢堡", 201: "麵食", 1215: "便當",
-               181: "飲料", 176: "甜點", 1211: "牛排", 186: "素食"}
+cuisine_dic = {'漢堡':177, '麵食':201, '便當':1215,
+               '飲料':181, '甜點':176, '牛排':1211, '素食':186}
 
 
 def food_to_str(_set):
@@ -111,13 +111,13 @@ class FoodAPI:
     def set_food_preference(self, food_list):
         if type(food_list) != type(set()):
             raise(TypeError)
-        if any(x not in cuisine_dic for x in food_list):
+        if any(cuisine_dic.get(x) == None for x in food_list):
             raise(ValueError)
         self.food_preference = food_list
         return self.food_preference
 
     def add_food_preference(self, food):
-        if food not in cuisine_dic:
+        if cuisine_dic.get(food) == None:
             raise(ValueError)
         self.food_preference.add(food)
         return self.food_preference
@@ -127,7 +127,7 @@ class FoodAPI:
         return self.food_preference
 
     def get_food_preference(self):
-        return food_to_str(self.food_preference)
+        return self.food_preference
 
     def set_location(self, longitude=0, latitude=0, location=''):
         self.longitude = longitude

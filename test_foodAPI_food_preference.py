@@ -10,7 +10,7 @@ class TestFoodPreference(TestFoodAPI):
         self.assertEqual(self.bot.food_preference, set())
 
     def test_set_food_preference(self):
-        food_list = {'a', 'b', 'c'}
+        food_list = {'牛排', '甜點', '便當'}
         ret = self.bot.set_food_preference(food_list)
         self.assertEqual(ret, food_list)
 
@@ -33,7 +33,7 @@ class TestFoodPreference(TestFoodAPI):
 
     def test_get_food_preference(self):
         ret = self.bot.get_food_preference()
-        expected = foodAPI.food_to_str(self.bot.food_preference)
+        expected = self.bot.food_preference
         self.assertEqual(ret, expected)
 
 
