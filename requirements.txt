@@ -22,6 +22,9 @@ requests==2.31.0
 requests-unixsocket==0.2.0
 six==1.14.0
 soupsieve==2.4.1
+<<<<<<< HEAD
 unattended-upgrades==0.1
+=======
+>>>>>>> 370c6d4ca9a4e235030015b20a9457c840623424
 urllib3==2.0.2
 yarl==1.9.2
