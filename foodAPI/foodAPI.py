@@ -136,9 +136,10 @@ class FoodAPI:
     def set_location(self, longitude=0, latitude=0, location=''):
         self.longitude = longitude
         self.latitude = latitude
-        (long, lat) = change_location(location)  # 把location轉經緯度
-        self.longitude = long
-        self.latitude = lat
+        if location != "":
+            (long, lat) = change_location(location)  # 把location轉經緯度
+            self.longitude = long
+            self.latitude = lat
 
     def get_restaurants(self):
         self.restaurants = self.send_request()
