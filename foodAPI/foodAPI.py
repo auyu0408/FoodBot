@@ -7,12 +7,12 @@ random.seed(0)
 
 
 def change_location(location):
-    URL = "https://www.google.com/maps/place?q=" + location
+    URL = 'https://www.google.com/maps/place?q=' + location
     r = requests.get(URL)
-    soup = BeautifulSoup(r.text, "html.parser")
+    soup = BeautifulSoup(r.text, 'html.parser')
     text = soup.prettify()  # 將部份資料轉成html形式
     # 尋找;window.APP_INITIALIZATION_STATE所在位置
-    initial_pos = text.find(";window.APP_INITIALIZATION_STATE")
+    initial_pos = text.find(';window.APP_INITIALIZATION_STATE')
     # 存取經緯鍍在的地方，ex.3610.8245986264596,121.43077076500904,25.175396183906233
     pos = text[initial_pos+36:initial_pos+85]
     print(pos)
@@ -22,17 +22,17 @@ def change_location(location):
     return (num1, num2)
 
 
-price_dic = {1: "低", 2: "中", 3: "高"}
+price_dic = {1: '低', 2: '中', 3: '高'}
 
 
 def price_to_str(_set):
     if len(_set) == 0:
-        return "無"
+        return '無'
     else:
-        string = ""
+        string = ''
         for i in _set:
-            string += price_dic[i] + " "
-        # return str(_set).strip("\{\}").replace("\'", "")
+            string += price_dic[i] + ' '
+        # return str(_set).strip('\{\}').replace('\'', '')
         return string.strip()
 
 
@@ -42,12 +42,12 @@ cuisine_dic = {177:'漢堡', 201:'麵食', 1215:'便當',
 
 def food_to_str(_set):
     if len(_set) == 0:
-        return "無"
+        return '無'
     else:
-        string = ""
+        string = ''
         for i in _set:
-            string += cuisine_dic[i] + " "
-        # return str(_set).strip("\{\}").replace("\'", "")
+            string += cuisine_dic[i] + ' '
+        # return str(_set).strip('\{\}').replace('\'', '')
         return string.strip()
 
 
@@ -136,7 +136,7 @@ class FoodAPI:
     def set_location(self, longitude=0, latitude=0, location=''):
         self.longitude = longitude
         self.latitude = latitude
-        if location != "":
+        if location != '':
             (long, lat) = change_location(location)  # 把location轉經緯度
             self.longitude = long
             self.latitude = lat
@@ -172,5 +172,5 @@ class FoodAPI:
 
 if __name__ == '__main__':  # pragma: no cover
     test = FoodAPI()
-    test.set_location(location="交通大學")
+    test.set_location(location='交通大學')
     

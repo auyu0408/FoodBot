@@ -2,7 +2,7 @@ import unittest
 from foodAPI.foodAPI import FoodAPI, price_to_str, food_to_str, food_name2id
 
 
-# cuisine_dic = {177: "漢堡", 201: "麵食", 1215: "便當", 181: "飲料", 176: "甜點", 1211: "牛排", 186: "素食"}
+# cuisine_dic = {177: '漢堡', 201: '麵食', 1215: '便當', 181: '飲料', 176: '甜點', 1211: '牛排', 186: '素食'}
 class Default():
     price_budget = [1]
     f1 = food_name2id('麵食')
