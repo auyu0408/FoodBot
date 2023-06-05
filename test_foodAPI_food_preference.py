@@ -52,6 +52,11 @@ class TestFoodPreference(TestFoodAPI):
         expected = foodAPI.food_to_str(self.bot.food_preference)
         self.assertEqual(ret, expected)
 
+        expected = '無'
+        self.bot.reset_food_preference()
+        ret = self.bot.get_food_preference()
+        self.assertEqual(ret, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
