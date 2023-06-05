@@ -22,17 +22,17 @@ jobs:
         pip install -r requirements.txt
     - name: Test food preference with unittest
       run: |
-        coverage run -m unittest test_foodAPI_food_preference.py
+        coverage run -m unittest test_foodAPI_food_preference.py > /dev/null
         coverage report
     - name: Test price budget with unittest
       run: |
-        coverage run -m unittest test_foodAPI_price_budget.py
+        coverage run -m unittest test_foodAPI_price_budget.py > /dev/null
         coverage report
     - name: Test other with unittest
       run: |
-        coverage run -m unittest test_foodAPI_other.py
+        coverage run -m unittest test_foodAPI_other.py > /dev/null
         coverage report
     - name: Coverage overall source codes
       run: |
-        coverage run -m unittest discover
+        coverage run -m unittest discover > /dev/null
         coverage report
