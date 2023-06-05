@@ -75,5 +75,5 @@ class TestPriceBudget(TestFoodAPI):
             self.bot.add_food_preference('A string')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()

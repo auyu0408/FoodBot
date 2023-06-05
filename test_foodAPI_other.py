@@ -50,5 +50,5 @@ class TestOther(TestFoodAPI):
             ret = self.bot.recommend()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()
