@@ -160,6 +160,8 @@ class FoodBot(Cog_Extension):
     async def recommend(self, interaction: discord.Interaction):
         user = interaction.user.name
         resturaunt = self.apis[user].recommend()
+        if resturaunt == "無":
+            await interaction.response.send_message(f"沒有符合條件的餐廳")
         await interaction.response.send_message(f"要不要吃: {resturaunt}")
 
     # Show setting
