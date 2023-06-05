@@ -8,7 +8,6 @@ random.seed(0)
 
 def change_location(location):
     URL = "https://www.google.com/maps/place?q=" + location
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     r = requests.get(URL, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.prettify()  # 將部份資料轉成html形式
@@ -16,6 +15,7 @@ def change_location(location):
     initial_pos = text.find(";window.APP_INITIALIZATION_STATE")
     # 存取經緯鍍在的地方，ex.3610.8245986264596,121.43077076500904,25.175396183906233
     pos = text[initial_pos+36:initial_pos+85]
+    print(pos)
     line = tuple(pos.split(','))
     num1 = float(line[1])
     num2 = float(line[2])
