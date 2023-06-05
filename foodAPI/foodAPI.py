@@ -171,9 +171,9 @@ class FoodAPI:
         return self.restaurants[num]
 
 if __name__ == '__main__':  # pragma: no cover
-    test = FoodAPI() # pragma: no cover
-    test.set_location(location='交通大學') # pragma: no cover
-    test.add_food_preference(177) # pragma: no cover
-    print(test.get_food_preference()) # pragma: no cover
-    print(test.recommend()) # pragma: no cover
+    test = FoodAPI()
+    test.set_location(location='交通大學')
+    test.add_food_preference(177)
+    print(test.get_food_preference())
+    print(test.recommend())
     
