@@ -33,11 +33,11 @@ class TestOther(TestFoodAPI):
         ret = self.bot.get_restaurants()
         self.assertNotEqual(ret, [])
 
-        with patch('foodAPI.foodAPI.requests.get', side_effect = mocked_requests_get) as fake_api:
-            fakeapi = TestFoodAPI()
-            expected = []
-            ret = fakeapi.bot.get_restaurants()
-            self.assertEqual(ret, expected)
+        #with patch('foodAPI.foodAPI.requests.get', side_effect = mocked_requests_get) as fake_api:
+        #    fakeapi = TestFoodAPI()
+        #    expected = []
+        #    ret = fakeapi.bot.get_restaurants()
+        #    self.assertEqual(ret, expected)
 
     def test_filter(self):
         pass

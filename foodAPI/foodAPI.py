@@ -8,7 +8,8 @@ random.seed(0)
 
 def change_location(location):
     URL = "https://www.google.com/maps/place?q=" + location
-    r = requests.get(URL)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    r = requests.get(URL, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.prettify()  # 將部份資料轉成html形式
     # 尋找;window.APP_INITIALIZATION_STATE所在位置
@@ -167,3 +168,8 @@ class FoodAPI:
         max = len(self.restaurants)
         num = random.randint(0, max)
         return self.restaurants[num]['name']
+
+if __name__ == '__main__':  # pragma: no cover
+    test = FoodAPI()
+    test.set_location(location="交通大學")
+    
