@@ -19,6 +19,7 @@ class TestPriceBudget(TestFoodAPI):
 
         with self.assertRaises(ValueError):
             self.bot.add_price_budget(123)
+        with self.assertRaises(ValueError):
             self.bot.add_price_budget('無限')
 
     def test_reset_price_budget(self):
@@ -45,10 +46,12 @@ class TestPriceBudget(TestFoodAPI):
 
         with self.assertRaises(ValueError):
             self.bot.set_food_preference({123})
+        with self.assertRaises(ValueError):
             self.bot.set_food_preference({1211, 201, 156})
 
         with self.assertRaises(TypeError):
             self.bot.set_food_preference(123)
+        with self.assertRaises(TypeError):
             self.bot.set_food_preference('A string')
 
     def test_reset_food_preference(self):
@@ -72,6 +75,7 @@ class TestPriceBudget(TestFoodAPI):
 
         with self.assertRaises(ValueError):
             self.bot.add_food_preference(1364)
+        with self.assertRaises(ValueError):
             self.bot.add_food_preference('A string')
 
 
