@@ -8,7 +8,7 @@ random.seed(0)
 
 def change_location(location):
     URL = "https://www.google.com/maps/place?q=" + location
-    r = requests.get(URL, headers=headers)
+    r = requests.get(URL)
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.prettify()  # 將部份資料轉成html形式
     # 尋找;window.APP_INITIALIZATION_STATE所在位置
