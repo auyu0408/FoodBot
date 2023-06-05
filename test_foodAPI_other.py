@@ -23,6 +23,10 @@ class TestOther(TestFoodAPI):
         self.bot.set_location(longitude=longitude, latitude=latitude)
         self.assertAlmostEqual(self.bot.longitude, longitude, delta=0.01)
         self.assertAlmostEqual(self.bot.latitude, latitude, delta=0.01)
+        
+        self.bot.set_location(location='交通大學')
+        self.assertAlmostEqual(self.bot.longitude, 120.98202608068497, delta=0.01)
+        self.assertAlmostEqual(self.bot.latitude, 24.7914804453823, delta=0.01)
 
     def test_get_restaurants(self):
         ret = self.bot.get_restaurants()

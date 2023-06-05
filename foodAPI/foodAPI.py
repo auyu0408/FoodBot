@@ -15,7 +15,6 @@ def change_location(location):
     initial_pos = text.find(';window.APP_INITIALIZATION_STATE')
     # 存取經緯鍍在的地方，ex.3610.8245986264596,121.43077076500904,25.175396183906233
     pos = text[initial_pos+36:initial_pos+85]
-    print(pos)
     line = tuple(pos.split(','))
     num1 = float(line[1])
     num2 = float(line[2])
