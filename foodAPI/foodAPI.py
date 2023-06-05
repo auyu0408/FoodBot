@@ -24,7 +24,7 @@ def change_location(location):
 price_dic = {1: '低', 2: '中', 3: '高'}
 
 
-def price_to_str(_set):
+def price_set2str(_set: set) -> str:
     if len(_set) == 0:
         return '無'
     else:
@@ -35,11 +35,11 @@ def price_to_str(_set):
         return string.strip()
 
 
-cuisine_dic = {177:'漢堡', 201:'麵食', 1215:'便當',
-               181:'飲料', 176:'甜點', 1211:'牛排', 186:'素食'}
+cuisine_dic = {177: '漢堡', 201: '麵食', 1215: '便當',
+               181: '飲料', 176: '甜點', 1211: '牛排', 186: '素食'}
 
 
-def food_to_str(_set):
+def food_set2str(_set: set) -> str:
     if len(_set) == 0:
         return '無'
     else:
@@ -93,7 +93,7 @@ class FoodAPI:
 
     def add_price_budget(self, budget):
         if price_dic.get(budget) == None:
-            raise(ValueError)
+            raise (ValueError)
         self.price_budget.add(budget)
         return self.price_budget
 
@@ -102,7 +102,7 @@ class FoodAPI:
         return self.price_budget
 
     def get_price_budget(self):
-        return price_to_str(self.price_budget)
+        return price_set2str(self.price_budget)
 
     def reset_food_preference(self):
         self.food_preference = set()
@@ -110,15 +110,15 @@ class FoodAPI:
 
     def set_food_preference(self, food_list):
         if type(food_list) != type(set()):
-            raise(TypeError)
+            raise (TypeError)
         if any(cuisine_dic.get(x) == None for x in food_list):
-            raise(ValueError)
+            raise (ValueError)
         self.food_preference = food_list
         return self.food_preference
 
     def add_food_preference(self, food):
         if cuisine_dic.get(food) == None:
-            raise(ValueError)
+            raise (ValueError)
         self.food_preference.add(food)
         return self.food_preference
 
@@ -126,11 +126,11 @@ class FoodAPI:
         if food in self.food_preference:
             self.food_preference.remove(food)
         else:
-            raise(ValueError)
+            raise (ValueError)
         return self.food_preference
 
     def get_food_preference(self):
-        return food_to_str(self.food_preference)
+        return food_set2str(self.food_preference)
 
     def set_location(self, longitude=0, latitude=0, location=''):
         self.longitude = longitude
@@ -172,10 +172,10 @@ class FoodAPI:
         num = random.randint(0, max)
         return self.restaurants[num]
 
+
 if __name__ == '__main__':  # pragma: no cover
     test = FoodAPI()
     test.set_location(location='交通大學')
     test.add_food_preference(177)
     print(test.get_food_preference())
     print(test.recommend())
-    

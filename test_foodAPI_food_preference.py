@@ -14,7 +14,7 @@ class TestFoodPreference(TestFoodAPI):
         ret = self.bot.set_food_preference(food_list)
         self.assertEqual(ret, food_list)
 
-        #error raise
+        # error raise
         with self.assertRaises(TypeError):
             self.bot.set_food_preference([1211])
         with self.assertRaises(ValueError):
@@ -31,7 +31,7 @@ class TestFoodPreference(TestFoodAPI):
         ret = self.bot.add_food_preference(186)
         self.assertEqual(ret, food_list)
 
-        #error raise
+        # error raise
         with self.assertRaises(ValueError):
             self.bot.add_food_preference(1)
 
@@ -42,14 +42,14 @@ class TestFoodPreference(TestFoodAPI):
         ret = self.bot.remove_food_preference(f)
         self.assertEqual(ret, food_list)
 
-        #error raise
+        # error raise
         with self.assertRaises(ValueError):
             f = foodAPI.food_name2id('牛排')
             self.bot.remove_food_preference(f)
 
     def test_get_food_preference(self):
         ret = self.bot.get_food_preference()
-        expected = foodAPI.food_to_str(self.bot.food_preference)
+        expected = foodAPI.food_set2str(self.bot.food_preference)
         self.assertEqual(ret, expected)
 
         expected = '無'
