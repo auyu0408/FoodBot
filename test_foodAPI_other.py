@@ -9,10 +9,12 @@ from test_foodAPI import DEFAULT
 
 import requests
 
+
 def mocked_requests_get(*args, **kwargs):
     res = requests.Response()
     res.status_code = requests.codes.not_found
     return res
+
 
 class TestOther(TestFoodAPI):
     def test_set_location(self):
@@ -23,9 +25,10 @@ class TestOther(TestFoodAPI):
         self.bot.set_location(longitude=longitude, latitude=latitude)
         self.assertAlmostEqual(self.bot.longitude, longitude, delta=0.01)
         self.assertAlmostEqual(self.bot.latitude, latitude, delta=0.01)
-        
+
         self.bot.set_location(location='交通大學')
-        self.assertAlmostEqual(self.bot.longitude, 120.98202608068497, delta=0.01)
+        self.assertAlmostEqual(
+            self.bot.longitude, 120.98202608068497, delta=0.01)
         self.assertAlmostEqual(self.bot.latitude, 24.7914804453823, delta=0.01)
 
     def test_get_restaurants(self):
@@ -55,6 +58,10 @@ class TestOther(TestFoodAPI):
         # with self.assertRaises(IndexError):
         ret = self.bot.recommend()
         self.assertIsNot(ret, [])
+
+        self.bot.reset_food_preference()
+        ret = self.bot.recommend()
+        self.assertEqual(ret, '無')
 
 
 if __name__ == '__main__':  # pragma: no cover
