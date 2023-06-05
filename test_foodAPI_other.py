@@ -28,9 +28,10 @@ class TestOther(TestFoodAPI):
         ret = self.bot.get_restaurants()
         self.assertIsNot(ret, [])
 
-        self.bot.set_food_preference('Invalid food')
+        with self.assertRaises(TypeError):
+            self.bot.set_food_preference('Invalid food')
         ret = self.bot.get_restaurants()
-        self.assertEqual(ret, [])
+        self.assertNotEqual(ret, [])
 
         with patch('foodAPI.foodAPI.requests.get', side_effect = mocked_requests_get) as fake_api:
             fakeapi = TestFoodAPI()
@@ -45,9 +46,11 @@ class TestOther(TestFoodAPI):
         ret = self.bot.recommend()
         self.assertIsNot(ret, [])
 
-        self.bot.add_food_preference('Invalid food')
-        with self.assertRaises(IndexError):
-            ret = self.bot.recommend()
+        with self.assertRaises(ValueError):
+            self.bot.add_food_preference('Invalid food')
+        # with self.assertRaises(IndexError):
+        ret = self.bot.recommend()
+        self.assertIsNot(ret, [])
 
 
 if __name__ == '__main__':  # pragma: no cover
