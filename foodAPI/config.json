@@ -13,7 +13,7 @@
         "food_characteristic": "",
         "use_free_delivery_label": false,
         "vertical": "restaurants",
-        "limit": 20,
+        "limit": 30,
         "offset": 0,
         "customer_type": "regular"
     }],
