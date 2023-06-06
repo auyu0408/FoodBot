@@ -41,6 +41,16 @@ class TestPriceBudget(TestFoodAPI):
         ret = self.bot.get_price_budget()
         self.assertEqual(ret, expected)
 
+        self.bot.price_budget = {1, 2}
+        expected = '低 中'
+        ret = self.bot.get_price_budget()
+        self.assertEqual(ret, expected)
+
+        self.bot.price_budget = set()
+        expected = '無'
+        ret = self.bot.get_price_budget()
+        self.assertEqual(ret, expected)
+
     def test_set_food_preference(self):
         expected = {186, 201, 1215}
         ret = self.bot.set_food_preference({201, 186, 1215})
