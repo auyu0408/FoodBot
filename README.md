@@ -4,23 +4,28 @@ This is a discord bot for choosing what to eat.
 
 [![Unittest](https://github.com/auyu0408/FoodBot/actions/workflows/Unittest.yml/badge.svg)](https://github.com/auyu0408/FoodBot/actions/workflows/Unittest.yml) [![Coverage](https://github.com/auyu0408/FoodBot/blob/main/coverage.svg)](https://github.com/auyu0408/FoodBot/blob/main/coverage.svg)
 
-## TODO
+## Set Up
+### Prerequisites
+- python 3.10
+- pipenv
+### Enviroment
+1. install pipenv
+```
+pipenv install --pytholn 3.10
+```
 
-### Test-Driven Development
+2. change config.ini.sample into config.ini
+```
+cp config.ini.sample config.ini
+```
 
-- Test code
-- Feature code
+3. add your Discord Bot token
+![image](https://github.com/auyu0408/FoodBot/assets/73648626/167225af-76b4-417c-98a2-f4559a19e982)
 
-### Criteria-Based Test Design
+4. start the application
+```
+pipenv shell
+python bot.py
+```
 
-#### Input Space Partition
-
-#### Graph Coverage
-
-- Edge-pair
-- Data-flow
-  - All define-use paths coverage (ADUPC)
-
-#### Logic Coverage
-
-#### Syntax Coverage
+5. Invite the bot into ypur discord server
