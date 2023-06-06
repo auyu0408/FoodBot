@@ -1,7 +1,7 @@
 import unittest
 
 from foodAPI import foodAPI
-from test_foodAPI import TestFoodAPI
+from tests.test_foodAPI import TestFoodAPI
 
 
 class TestFoodPreference(TestFoodAPI):

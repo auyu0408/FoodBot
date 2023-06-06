@@ -1,6 +1,6 @@
 import unittest
 
-from test_foodAPI import TestFoodAPI
+from tests.test_foodAPI import TestFoodAPI
 
 
 class TestPriceBudget(TestFoodAPI):

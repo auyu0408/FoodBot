@@ -1,6 +1,6 @@
 import unittest
 
-from test_foodAPI import TestFoodAPI
+from tests.test_foodAPI import TestFoodAPI
 from foodAPI.foodAPI import price_set2str, food_set2str, food_name2id
 
 

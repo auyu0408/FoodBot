@@ -3,8 +3,8 @@ from unittest.mock import patch
 from unittest.mock import Mock
 
 
-from test_foodAPI import TestFoodAPI
-from test_foodAPI import DEFAULT
+from tests.test_foodAPI import TestFoodAPI
+from tests.test_foodAPI import DEFAULT
 
 
 import requests
