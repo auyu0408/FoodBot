@@ -3,8 +3,6 @@ import requests
 import random
 from bs4 import BeautifulSoup
 
-random.seed(0)
-
 
 def change_location(location):
     URL = 'https://www.google.com/maps/place?q=' + location
@@ -203,7 +201,7 @@ class FoodAPI:
         mx = len(self.restaurants)
         if mx == 0:
             return '無'
-        num = random.randint(0, mx)
+        num = random.randint(0, mx - 1)
         return self.restaurants[num]
 
 
