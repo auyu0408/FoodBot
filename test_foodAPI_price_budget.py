@@ -22,6 +22,16 @@ class TestPriceBudget(TestFoodAPI):
         with self.assertRaises(ValueError):
             self.bot.add_price_budget('無限')
 
+    def test_remove_price_budget(self):
+        self.bot.price_budget = {1, 2, 3}
+
+        expected = {1, 2}
+        ret = self.bot.remove_price_budget(3)
+        self.assertEqual(ret, expected)
+
+        with self.assertRaises(ValueError):
+            self.bot.remove_price_budget(123)
+
     def test_reset_price_budget(self):
         ret = self.bot.reset_price_budget()
         self.assertEqual(ret, set())

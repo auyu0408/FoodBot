@@ -113,6 +113,13 @@ class FoodAPI:
         self.price_budget.add(budget)
         return self.price_budget
 
+    def remove_price_budget(self, budget):
+        if budget in self.price_budget:
+            self.price_budget.remove(budget)
+        else:
+            raise ValueError('not in valid price')
+        return self.price_budget
+
     def reset_price_budget(self):
         self.price_budget = set()
         return self.price_budget
