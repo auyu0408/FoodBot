@@ -25,14 +25,22 @@ price_dic = {1: '低', 2: '中', 3: '高'}
 
 
 def price_set2str(_set: set) -> str:
+    # check type
+    if type(_set) != set:
+        raise TypeError('input should be a set')
+
+    # blank set
     if len(_set) == 0:
         return '無'
-    else:
-        string = ''
-        for i in _set:
-            string += price_dic[i] + ' '
-        # return str(_set).strip('\{\}').replace('\'', '')
-        return string.strip()
+
+    string = ''
+    for i in _set:
+        # invalid price
+        if i not in price_dic:
+            raise ValueError('not valid price')
+        string += price_dic[i] + ' '
+
+    return string.strip()
 
 
 cuisine_dic = {177: '漢堡', 201: '麵食', 1215: '便當',
@@ -40,14 +48,22 @@ cuisine_dic = {177: '漢堡', 201: '麵食', 1215: '便當',
 
 
 def food_set2str(_set: set) -> str:
+    # check type
+    if type(_set) != set:
+        raise TypeError('input should be a set')
+
+    # blank set
     if len(_set) == 0:
         return '無'
-    else:
-        string = ''
-        for i in _set:
-            string += cuisine_dic[i] + ' '
-        # return str(_set).strip('\{\}').replace('\'', '')
-        return string.strip()
+
+    string = ''
+    for i in _set:
+        # invalid cuisine
+        if i not in cuisine_dic:
+            raise ValueError('not valid cuisine')
+        string += cuisine_dic[i] + ' '
+
+    return string.strip()
 
 
 def food_name2id(name: str) -> int:

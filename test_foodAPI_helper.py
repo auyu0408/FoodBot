@@ -5,7 +5,7 @@ from foodAPI.foodAPI import price_set2str, food_set2str, food_name2id
 
 
 class TestHelper(TestFoodAPI):
-    def test_price_to_str(self):
+    def test_price_set2str(self):
         expected = '低'
         ret = price_set2str({1})
         self.assertEqual(ret, expected)
@@ -18,7 +18,13 @@ class TestHelper(TestFoodAPI):
         ret = price_set2str(set())
         self.assertEqual(ret, expected)
 
-    def test_food_to_str(self):
+        with self.assertRaises(ValueError):
+            price_set2str({0})
+
+        with self.assertRaises(TypeError):
+            price_set2str(1)
+
+    def test_food_set2str(self):
         expected = '甜點'
         ret = food_set2str({176})
         self.assertEqual(ret, expected)
@@ -30,6 +36,12 @@ class TestHelper(TestFoodAPI):
         expected = '無'
         ret = food_set2str(set())
         self.assertEqual(ret, expected)
+
+        with self.assertRaises(ValueError):
+            food_set2str({'甜點'})
+
+        with self.assertRaises(TypeError):
+            food_set2str(176)
 
     def test_food_name2id(self):
         expected = 1215
