@@ -5,27 +5,43 @@ This is a discord bot for choosing what to eat.
 [![Unittest](https://github.com/auyu0408/FoodBot/actions/workflows/Unittest.yml/badge.svg)](https://github.com/auyu0408/FoodBot/actions/workflows/Unittest.yml) [![Coverage](https://github.com/auyu0408/FoodBot/blob/main/coverage.svg)](https://github.com/auyu0408/FoodBot/blob/main/coverage.svg)
 
 ## Set Up
+
 ### Prerequisites
-- python 3.10
+
+- Python 3.10
 - pipenv
-### Enviroment
-1. install pipenv
+
+### Step by step
+
+1. Clone repo
 ```
-pipenv install --pytholn 3.10
+$ git clone https://github.com/auyu0408/FoodBot.git
 ```
 
-2. change config.ini.sample into config.ini
+2. Install pipenv
 ```
-cp config.ini.sample config.ini
+$ pipenv install --python 3.10
 ```
 
-3. add your Discord Bot token
+3. Install Dependencies
+```
+$ sudo apt install build-essential libpython3-dev libdbus-1-dev
+$ cd FoodBot
+$ pip install -r requirements.txt
+```
+
+4. Change `config.ini.sample` into `config.ini`
+```
+$ cp config.ini.sample config.ini
+```
+
+5. Configure your Discord Bot token
 ![image](https://github.com/auyu0408/FoodBot/assets/73648626/167225af-76b4-417c-98a2-f4559a19e982)
 
-4. start the application
+6. Start the application
 ```
-pipenv shell
-python bot.py
+$ pipenv shell
+$ python bot.py
 ```
 
-5. Invite the bot into ypur discord server
+7. Invite the bot into ypur discord server
