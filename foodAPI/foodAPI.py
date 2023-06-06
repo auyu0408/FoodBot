@@ -29,7 +29,7 @@ def price_set2str(_set: set) -> str:
     if type(_set) != set:
         raise TypeError('input should be a set')
 
-    # blank set
+    # null set
     if len(_set) == 0:
         return '無'
 
@@ -52,7 +52,7 @@ def food_set2str(_set: set) -> str:
     if type(_set) != set:
         raise TypeError('input should be a set')
 
-    # blank set
+    # null set
     if len(_set) == 0:
         return '無'
 
