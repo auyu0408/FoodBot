@@ -200,10 +200,10 @@ class FoodAPI:
     def recommend(self):
         self.restaurants = self.send_request()
         self.restaurants = self.filter()
-        max = len(self.restaurants)
-        if max == 0:
+        mx = len(self.restaurants)
+        if mx == 0:
             return '無'
-        num = random.randint(0, max)
+        num = random.randint(0, mx)
         return self.restaurants[num]
 
 
