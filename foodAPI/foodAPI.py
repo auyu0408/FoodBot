@@ -92,15 +92,15 @@ class FoodAPI:
         self.data['latitude'] = self.latitude
         budget = ""
         for price in self.price_budget:
-            ans+=str(price)
-            ans+=","
+            budget += str(price)
+            budget += ","
 
         self.data['budget'] = budget
 
         food = ""
         for preference in self.food_preference:
-            ans+=str(preference)
-            ans+=","
+            food += str(preference)
+            food += ","
 
         self.data['cuisine'] = food
 
