@@ -21,13 +21,6 @@ class FoodBot(Cog_Extension):
         self.apis[user].set_location(location=location)
         await interaction.response.send_message(f"目前位置: {location}")
 
-    # Set price budget
-    # @app_commands.command(name="set_price_budget", description="設定價格範圍")
-    # async def set_price_budget(self, interaction: discord.Interaction, min: int, max: int):
-    #     user = interaction.user.name
-    #     self.apis[user].set_price_budget(min, max)
-    #     await interaction.response.send_message(f"價格範圍: {self.apis[user].get_price_budget()}")
-
     # New set price budget
     class budget(discord.ui.View):
         def __init__(self, user, apis: Dict[str, FoodAPI]):
@@ -83,38 +76,12 @@ class FoodBot(Cog_Extension):
             timestamp=datetime.datetime.now()
         )
         await interaction.response.send_message(embed=embed, view=view)
-
-    # Reset price budget
-    # @app_commands.command(name="reset_price_budget", description="重設價格範圍")
-    # async def reset_price_budget(self, interaction: discord.Interaction):
-    #     user = interaction.user.name
-    #     self.apis[user].reset_price_budget()
-    #     await interaction.response.send_message(f"價格範圍: {self.apis[user].get_price_budget()}")
     
     # Get price budget
     @app_commands.command(name="get_price_budget", description="取得價格範圍")
     async def get_price_budget(self, interaction: discord.Interaction):
         user = interaction.user.name
         await interaction.response.send_message(f"價格範圍: {self.apis[user].get_price_budget()}")
-
-    # Add food preference
-    # @app_commands.command(name="add_food_preference", description="設定食物偏好")
-    # @app_commands.describe(food="輸入食物名稱")
-    # @app_commands.choices(
-    #     food=[
-    #         Choice(name="漢堡", value="漢堡"),
-    #         Choice(name="牛排", value="牛排"),
-    #         Choice(name="麵食", value="麵食"),
-    #         Choice(name="素食", value="素食"),
-    #         Choice(name="便當", value="便當"),
-    #         Choice(name="飲料", value="飲料"),
-    #         Choice(name="甜點", value="甜點")
-    #     ]
-    # )
-    # async def add_food_preference(self, interaction: discord.Interaction, food: str):
-    #     user = interaction.user.name
-    #     self.apis[user].add_food_preference(food)
-    #     await interaction.response.send_message(f"食物偏好: {self.apis[user].get_food_preference()}")
 
     # new add food preference
     class food_preference(discord.ui.View):
@@ -233,12 +200,12 @@ class FoodBot(Cog_Extension):
         user = interaction.user.name
         await interaction.response.send_message(f"食物偏好: {self.apis[user].get_food_preference()}")
 
-    # Get resturaunts
-    @app_commands.command(name="get_resturaunts", description="取得附近餐廳")
-    async def get_resturaunts(self, interaction: discord.Interaction):
-        user = interaction.user.name
-        ls = self.apis[user].get_restaurants()
-        await interaction.response.send_message(ls)
+    ## Get resturaunts
+    #@app_commands.command(name="get_resturaunts", description="取得附近餐廳")
+    #async def get_resturaunts(self, interaction: discord.Interaction):
+    #    user = interaction.user.name
+    #    ls = self.apis[user].get_restaurants()
+    #    await interaction.response.send_message(ls)
 
     # Recommend a resturaunt
     @app_commands.command(name="recommend", description="建議一間餐廳")
@@ -253,8 +220,9 @@ class FoodBot(Cog_Extension):
     @app_commands.command(name="show_setting", description="使用者的搜尋設定")
     async def show_setting(self, interaction: discord.Interaction):
         user = interaction.user.name
-        ls = self.apis[user].get_food_preference()
-        await interaction.response.send_message(f'{user} 的食物偏好: {ls}')
+        fs = self.apis[user].get_food_preference()
+        ps = self.apis[user].get_price_budget()
+        await interaction.response.send_message(f'{user} 的食物偏好: {fs}\n{user} 的預算: {ps}')
 
 
 async def setup(bot):
