@@ -26,6 +26,9 @@ $ pipenv install --python 3.10
 3. Install Dependencies
 ```
 $ sudo apt install build-essential libpython3-dev libdbus-1-dev
+$ pip install -U discord.py
+$ pip install beautifulsoup4
+$ pip install requests
 $ cd FoodBot
 $ pip install -r requirements.txt
 ```
